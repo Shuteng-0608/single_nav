@@ -1,0 +1,17 @@
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- 包含惯性矩镇文件 -->
+    <xacro:include filename="head.xacro" />
+    <!-- 包含底盘、摄像头与雷达的 xacro 文件 -->
+    <xacro:include filename="demo05_car_base.urdf.xacro" />
+    <xacro:include filename="demo06_car_camera.urdf.xacro" />
+    <xacro:include filename="demo07_car_laser.urdf.xacro" />
+
+    <!-- 运动控制 -->
+    <xacro:include filename="gazebo/move.xacro" />
+    <!-- 集成 laser -->
+    <xacro:include filename="gazebo/laser.xacro" />
+    <!-- 集成 camera -->
+    <xacro:include filename="gazebo/camera.xacro" />
+    <!-- 集成 kinect -->
+    <xacro:include filename="gazebo/kinect.xacro" />
+</robot>
