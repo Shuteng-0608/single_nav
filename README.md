@@ -4,7 +4,7 @@
     sudo apt install ros-noetic-gmapping
     sudo apt install ros-noetic-map-server
     sudo apt install ros-noetic-navigation
-## Donwload and compile the project file
+## Donwload and compile the project
     cd catkin_ws/src/
     git clone https://github.com/Shuteng-0608/single_nav.git
     cd ..
