@@ -11,23 +11,23 @@
     catkin_make -DCATKIN_WHITELIST_PACKAGES="single_nav"
     source ./devel/setup.bash
 ## Mapping the Gazebo world (SLAM - GMapping)
-In **Terminal 01** 
+In **Terminal 01**, launch the Gazebo world 
 
     cd catkin_ws/
     source ./devel/setup.bash
     roslaunch urdf02_gazebo demo03_env.launch
-In **Terminal 02**
+In **Terminal 02**, launch the slam-gmapping node
 
     cd catkin_ws/
     source ./devel/setup.bash
     roslaunch nav_demo nav01_slam.launch
-In **Terminal 03**
+In **Terminal 03**, use the keyboard controling the robot to build tthe map
 
     cd catkin_ws/
     source ./devel/setup.bash
     rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
-In **Terminal 04**
+In **Terminal 04**, after building the whole map
 
     cd catkin_ws/
     source ./devel/setup.bash
