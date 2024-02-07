@@ -1,4 +1,4 @@
-# Single Robot Mapping and Navigation with the ROS Navigation Stack (Only test on ubuntu 20.04 ROS-Noetic)
+# Single Robot Mapping and Navigation with the ROS Navigation Stack (Only test on ubuntu 20.04 - ROS Noetic)
 
 ## Required dependencies
     sudo apt install ros-noetic-gmapping
