@@ -1,0 +1,32 @@
+<launch>
+    <arg name="robot_name" default="rb_0" />
+    <arg name="initial_pose_x" default="0.0" />
+    <arg name="initial_pose_y" default="0.0" />
+    <arg name="initial_pose_a" default="0.0" />
+  
+    <arg name="map_file" default="$(find multi_nav)/maps/nav.yaml" />
+  
+    <group ns="$(arg robot_name)">
+      <!-- Run the map server -->
+      <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  
+      <!--- Run AMCL -->
+      <include file="$(find multi_nav)/launch/amcl.launch">
+        <arg name="scan_topic" value="scan" />
+        <arg name="initial_pose_x" value="$(arg initial_pose_x)" />
+        <arg name="initial_pose_y" value="$(arg initial_pose_y)" />
+        <arg name="initial_pose_a" value="$(arg initial_pose_a)" />
+        <arg name="odom_frame_id" value="$(arg robot_name)/odom" />
+        <arg name="base_frame_id" value="$(arg robot_name)/base_footprint" />
+      </include>
+  
+      <!--- Run Move Base -->
+      <include file="$(find multi_nav)/launch/move_base.launch">
+        <arg name="params_file_name" value="$(arg robot_name)" />
+      </include>
+
+      <!-- <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" /> -->
+      <!-- <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" /> -->
+    </group>
+  
+  </launch>

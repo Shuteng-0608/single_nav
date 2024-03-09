@@ -1,0 +1,70 @@
+<launch>
+
+    <!-- ============ -->
+    <!-- Initlization -->
+    <!-- ============ -->
+    <arg name="world_name" default="$(find multi_nav)/worlds/box_house.world" />
+    <arg name="use_sim_time" default="true" />
+    <arg name="gui" default="true" />
+    <arg name="headless" default="false" />
+   
+    <!-- Robot Spawn Pose -->
+    <arg name="first_rb" default="rb_0" />
+    <arg name="second_rb" default="rb_1" />
+  
+    <arg name="first_rb_x" default="0" />
+    <arg name="first_rb_y" default="0" />
+    <arg name="first_rb_z" default="0.1" />
+    <arg name="first_rb_yaw" default="0" />
+
+    <arg name="second_rb_x" default="2" />
+    <arg name="second_rb_y" default="2" />
+    <arg name="second_rb_z" default="0.1" />
+    <arg name="second_rb_yaw" default="0" />
+    
+  
+  
+    <!-- Launch Gazebo with the specified world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)" />
+        <!-- <arg name="debug" value="0" /> -->
+        <!-- <arg name="gui" value="$(arg gui)" />
+        <arg name="use_sim_time" value="$(arg use_sim_time)" />
+        <arg name="headless" value="$(arg headless)" /> -->
+        <!-- <arg name="paused" value="false" /> -->
+    </include>
+
+    <!-- robot-1 -->
+    <group ns="$(arg first_rb)">
+        <param name="robot_description" command="$(find xacro)/xacro $(find urdf02_gazebo)/urdf/rb_0.urdf.xacro" />
+        <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" >
+            <param name="tf_prefix" value="$(arg first_rb)" />
+        </node>
+
+        <node pkg="gazebo_ros" type="spawn_model" name="model" 
+        args="-urdf 
+            -model rb_0 
+            -param robot_description 
+            -x $(arg first_rb_x) 
+            -y $(arg first_rb_y) 
+            -z $(arg first_rb_z) 
+            -Y $(arg first_rb_yaw)" />
+    </group>
+  
+    <!-- robot-2 -->
+    <group ns="$(arg second_rb)">
+        <param name="robot_description" command="$(find xacro)/xacro $(find urdf02_gazebo)/urdf/rb_1.urdf.xacro" />
+        <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" >
+            <param name="tf_prefix" value="$(arg second_rb)" />
+        </node>
+        <node pkg="gazebo_ros" type="spawn_model" name="model" 
+        args="-urdf 
+            -model rb_1 
+            -param robot_description 
+            -x $(arg second_rb_x) 
+            -y $(arg second_rb_y) 
+            -z $(arg second_rb_z) 
+            -Y $(arg second_rb_yaw)" />
+    </group>
+  
+  </launch>
